@@ -6,7 +6,7 @@ import MeetupDetail from "@/components/meetups/MeetupDetail";
 export const revalidate = 1;
 
 // Enable dynamic params fallback (equivalent to fallback: true in pages router)
-export const dynamicParams = 'blocking';
+export const dynamicParams = true;
 
 async function getMeetupData(meetupId) {
   // Connect to MongoDB
