@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meetup App
+
+A modern web application built with Next.js for discovering and creating meetups. Browse meetups, view details, and add your own events to connect with the community.
+
+## Features
+
+- **Browse Meetups** — View all available meetups on the home page
+- **Meetup Details** — Click on any meetup to see full details (title, address, image, description)
+- **Create Meetups** — Add new meetups through an intuitive form
+- **Dynamic SEO** — Page titles and meta descriptions update based on meetup data
+- **Static Generation** — Pre-rendered pages with incremental static regeneration (ISR)
+- **Database Integration** — MongoDB integration for persistent data storage
+
+## Tech Stack
+
+- **Framework** — Next.js 15+ (App Router)
+- **UI Library** — React 18+
+- **Database** — MongoDB
+- **Styling** — CSS (custom components)
+- **Runtime** — Node.js
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js 18+ installed
+- MongoDB connection string
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <your-repo-url>
+   cd meetup-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── page.js                 # Home page (all meetups)
+│   ├── new-meetup/
+│   │   ├── page.js            # Create new meetup page
+│   │   └── layout.js          # Layout with metadata
+│   ├── [meetupId]/
+│   │   └── page.js            # Meetup detail page
+│   ├── api/
+│   │   └── new-meetup/
+│   │       └── route.js       # API endpoint for creating meetups
+│   └── layout.js              # Root layout
+├── components/
+│   └── meetups/
+│       ├── MeetupList.jsx     # List component
+│       ├── MeetupDetail.jsx   # Detail component
+│       └── NewMeetupForm.jsx  # Form component
+└── page.css                    # Styles
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## API Routes
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### POST `/api/new-meetup`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a new meetup.
 
-## Learn More
+**Request body:**
 
-To learn more about Next.js, take a look at the following resources:
+```json
+{
+  "title": "React Meetup",
+  "address": "123 Main St, City",
+  "image": "https://example.com/image.jpg",
+  "description": "A meetup for React enthusiasts"
+}
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Response:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{
+  "message": "Meetup created successfully",
+  "meetupId": "507f1f77bcf86cd799439011"
+}
+```
 
-## Deploy on Vercel
+## Environment Variables
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Store your MongoDB connection string in a `.env.local` file (not included in version control):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/?appName=...
+```
+
+## Key Features Explained
+
+### Static Site Generation (SSG) with ISR
+
+- Home page pre-renders all meetups at build time
+- Detail pages pre-render based on `generateStaticParams()`
+- Pages revalidate every 10 seconds (`revalidate = 10`)
+
+### Dynamic Metadata
+
+- Page titles and descriptions update based on meetup data
+- Uses `generateMetadata()` function in detail page
+
+### Server & Client Components
+
+- Pages use Server Components for data fetching
+- Forms use `"use client"` directive for interactivity
+
+## Scripts
+
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm start` — Start production server
+
+## License
+
+MIT
