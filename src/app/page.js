@@ -5,8 +5,8 @@ import { MongoClient } from "mongodb";
 import { Fragment } from "react";
 import MeetupList from "@/components/meetups/MeetupList";
 
-// ISR: Revalidate every 10 seconds (equivalent to your getStaticProps revalidate)
-export const revalidate = 10;
+// ISR: Revalidate every 1 seconds (equivalent to your getStaticProps revalidate)
+export const revalidate = 1;
 
 
 export const metadata = {

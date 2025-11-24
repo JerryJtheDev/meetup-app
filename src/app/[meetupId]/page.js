@@ -2,11 +2,11 @@ import { Fragment } from "react";
 import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "@/components/meetups/MeetupDetail";
 
-// ISR: Revalidate every 10 seconds
-export const revalidate = 10;
+// ISR: Revalidate every 1 seconds
+export const revalidate = 1;
 
 // Enable dynamic params fallback (equivalent to fallback: true in pages router)
-export const dynamicParams = false;
+export const dynamicParams = 'blocking';
 
 async function getMeetupData(meetupId) {
   // Connect to MongoDB
